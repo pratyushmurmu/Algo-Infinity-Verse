@@ -3895,6 +3895,9 @@ body {
     overflow: hidden;
     cursor: pointer;
     pointer-events: auto !important;
+    display: flex;
+  flex-direction: column;
+  min-height: 320px;
 }
 .start-quiz-btn {
     pointer-events: auto !important;
@@ -3911,21 +3914,7 @@ body {
     height: 3px;
     background: var(--gradient-4);
 } */
-
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 20px;
-  padding: 2rem;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  min-height: 320px;
-}
-
+ 
 .quiz-card::before {
   content: "";
   position: absolute;
