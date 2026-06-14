@@ -1996,6 +1996,7 @@ function initNavbar() {
 function initHeroSection() {
   // Typing animation
   const typingElement = document.getElementById("typingText");
+  if (!typingElement) return;
   const texts = [
     "Arrays",
     "Linked Lists",
@@ -2220,7 +2221,10 @@ function initTopicOfTheDay() {
   const topic = getDailyTopic();
   if (!topic) return;
 
-  document.getElementById("totdIcon").textContent = topic.icon;
+  const totdIcon = document.getElementById("totdIcon");
+  if (!totdIcon) return;
+
+  totdIcon.textContent = topic.icon;
   document.getElementById("totdTitle").textContent = topic.name;
   document.getElementById("totdDesc").textContent = topic.description;
 
@@ -2239,6 +2243,7 @@ function initTopicOfTheDay() {
 
 function initTopicsSection() {
   const topicsGrid = document.querySelector(".topics-grid");
+  if (!topicsGrid) return;
   topicsGrid.innerHTML = "";
   dsaTopics.forEach((topic, index) => {
     const card = document.createElement("div");
@@ -4005,12 +4010,17 @@ function initDashboard() {
 }
 
 function updateDashboard() {
-  document.getElementById("completedProblems").textContent =
-    userProgress.completedProblems.length;
-  document.getElementById("currentStreak").textContent = userProgress.streak;
+  const completedProblemsEl = document.getElementById("completedProblems");
+  if (completedProblemsEl) completedProblemsEl.textContent = userProgress.completedProblems.length;
+
+  const currentStreakEl = document.getElementById("currentStreak");
+  if (currentStreakEl) currentStreakEl.textContent = userProgress.streak;
+
   var currentFreezes = document.getElementById("currentFreezes");
   if (currentFreezes) currentFreezes.textContent = userProgress.freezes || 0;
-  document.getElementById("totalXP").textContent = userProgress.xp;
+
+  const totalXPEl = document.getElementById("totalXP");
+  if (totalXPEl) totalXPEl.textContent = userProgress.xp;
 
   updateCurrentDate();
   updateActivityList();
@@ -4038,6 +4048,8 @@ function updateCurrentDate() {
 
 function updateActivityList() {
   const activityList = document.getElementById("activityList");
+
+  if (!activityList) return;
 
   if (userProgress.completedProblems.length === 0) {
     activityList.innerHTML =
@@ -4201,6 +4213,7 @@ function updateBadges() {
   }
 
   // Dashboard badges
+  if (container) {
   container.innerHTML = badges
     .map(
       (badge) =>
@@ -4214,8 +4227,10 @@ function updateBadges() {
         </div>`,
     )
     .join("");
+  }
 
   // Gamification section badges
+  if (grid) {
   grid.innerHTML = badges
     .map(
       (badge) =>
@@ -4229,6 +4244,7 @@ function updateBadges() {
         </div>`,
     )
     .join("");
+  }
 }
 
 function updateLeaderboard() {
@@ -4490,9 +4506,12 @@ function initChatbot() {
   const send = document.getElementById("chatbotSend");
   const quickQs = document.querySelectorAll(".quick-q");
 
+  if (!toggle || !windowEl || !close || !input || !send) return;
+
   toggle.addEventListener("click", () => {
     windowEl.classList.toggle("hidden");
-    toggle.querySelector(".chatbot-badge").style.display = "none";
+    const badge = toggle.querySelector(".chatbot-badge");
+    if (badge) badge.style.display = "none";
   });
 
   close.addEventListener("click", () => {
