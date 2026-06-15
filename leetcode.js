@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
 
             // Error Boundary check for missing or invalid users
-            if (!data || data.errors || data.status === 'error') {
+            if (!data || (data.errors && data.errors.length > 0) || data.matchedUser === null || data.status === 'error') {
                 throw new Error('User profile data could not be found or fetched.');
             }
 
